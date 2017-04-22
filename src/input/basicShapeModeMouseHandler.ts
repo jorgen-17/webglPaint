@@ -1,8 +1,8 @@
-import { Point2d } from "../graphics/geometry/point2d";
+import { Point2d } from "webgl-renderer";
 import { IMouseHandler } from "./iMouseHandler";
-import { IWebGLRenderer } from "../graphics/webglRenderer";
-import { Shape } from "../graphics/geometry/shape";
-import { ShapeFactory } from "../graphics/geometry/shapeFactory";
+import { IWebGLRenderer } from "webgl-renderer";
+import { Shape } from "webgl-renderer";
+import { ShapeFactory } from "webgl-renderer";
 import { MouseHelper } from "./mouseHelper";
 
 export class BasicShapeModeMouseHandler implements IMouseHandler

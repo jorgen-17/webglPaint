@@ -1,5 +1,5 @@
 import { IMouseHandler } from "./iMouseHandler";
-import { IWebGLRenderer } from "../graphics/webglRenderer";
+import { IWebGLRenderer } from "webgl-renderer";
 import { MouseHelper } from "./mouseHelper";
 
 export class RenderModeMouseHandler implements IMouseHandler

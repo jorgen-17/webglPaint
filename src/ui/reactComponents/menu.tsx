@@ -4,7 +4,7 @@ import { ShapeModeButton } from "./shapeModeButton";
 import { RenderModeButton } from "./renderModeButton";
 import { ColorModeButton } from "./colorModeButton";
 import { Dispatcher } from "../../simpledux";
-import { Color } from "../../graphics/colorMapper";
+import { Color } from "webgl-renderer";
 import * as Events from "../../events";
 
 export interface IMenuProps

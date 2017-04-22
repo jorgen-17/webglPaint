@@ -1,7 +1,7 @@
-import { Point2d } from "../graphics/geometry/point2d";
+import { Point2d } from "webgl-renderer";
 import { IMouseHandler } from "./iMouseHandler";
-import { IWebGLRenderer } from "../graphics/webglRenderer";
-import { Line } from "../graphics/geometry/line";
+import { IWebGLRenderer } from "webgl-renderer";
+import { Line } from "webgl-renderer";
 import { MouseHelper } from "./mouseHelper";
 
 export class LineMouseHandler implements IMouseHandler

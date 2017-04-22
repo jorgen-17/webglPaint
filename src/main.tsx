@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { IWebGLRenderer, WebGLRenderer } from "./graphics/webglRenderer";
-import { ContextWrangler } from "./utils/contextWrangler";
+import { IWebGLRenderer, WebGLRenderer, ContextWrangler } from "webgl-renderer";
 import { CanvasMouseHandler } from "./input/canvasMouseHandler";
 import { RenderModeMouseHandler } from "./input/renderModeMouseHandlers";
 import { BasicShapeModeMouseHandler } from "./input/basicShapeModeMouseHandler";

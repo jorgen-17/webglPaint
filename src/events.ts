@@ -1,7 +1,7 @@
 import { IPayload } from "simple-dux/dispatcher";
-import { Color } from "./graphics/colorMapper";
-import { ShapeMode } from "./graphics/geometry/shapeMode";
-import { RenderMode } from "./graphics/renderModeMapper";
+import { Color } from "webgl-renderer";
+import { ShapeMode } from "webgl-renderer";
+import { RenderMode } from "webgl-renderer";
 export class ColorChangeEvent implements IPayload
 {
     public event_type = "colorChanged";

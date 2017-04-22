@@ -1,4 +1,4 @@
-import { IWebGLRenderer } from "../graphics/webglRenderer";
+import { IWebGLRenderer } from "webgl-renderer";
 
 export class Callbacks
 {

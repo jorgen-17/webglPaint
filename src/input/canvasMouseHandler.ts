@@ -1,4 +1,4 @@
-import { IWebGLRenderer } from "../graphics/webglRenderer";
+import { IWebGLRenderer } from "webgl-renderer";
 import { IMouseHandler } from "./iMouseHandler";
 
 export class CanvasMouseHandler

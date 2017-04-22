@@ -1,4 +1,4 @@
-import { Point2d } from "../graphics/geometry/point2d";
+import { Point2d } from "webgl-renderer";
 
 export class MouseHelper
 {
