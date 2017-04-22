@@ -1,5 +1,5 @@
 {
-    "name": "webgl-renderer",
+    "name": "webgl-paint",
     "version": "0.2.2",
     "description": "webGl renderering engine",
     "main": "index.html",
