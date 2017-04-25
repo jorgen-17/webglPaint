@@ -9,12 +9,15 @@ import { LineMouseHandler } from "./input/lineMouseHandler";
 import { Menu } from "./ui/reactComponents/menu";
 import { Dispatcher } from "./simpledux";
 import * as Events from "./events";
+import { Color, ColorMapper } from "webgl-renderer";
+
 class App extends React.Component<{}, {}>
 {
     private canvas:  HTMLCanvasElement;
     private gl: WebGLRenderingContext;
     private renderer: IWebGLRenderer;
     private canvasMouseHandler: CanvasMouseHandler;
+    private color: Color;
 
     constructor()
     {
@@ -25,7 +28,8 @@ class App extends React.Component<{}, {}>
         const lineMouseHandler = new LineMouseHandler();
 
         Dispatcher.addCallback("colorChanged", (colorPayload: Events.ColorChangeEvent) => {
-            this.renderer.color = colorPayload.newColor;
+            this.color = colorPayload.newColor;
+            this.renderer.color = ColorMapper.colorToRGBColor(colorPayload.newColor);
             this.setState({});
         });
 
@@ -47,7 +51,9 @@ class App extends React.Component<{}, {}>
         this.canvas = document.getElementById("mycanvas") as HTMLCanvasElement;
         this.gl = ContextWrangler.getContext(this.canvas);
         this.renderer = new WebGLRenderer(this.canvas.width, this.canvas.height, this.gl);
-        this.renderer.color = "white";
+
+        this.color = "white";
+        this.renderer.color = ColorMapper.colorToRGBColor(this.color);
 
         window.addEventListener("resize", () => { Callbacks.resizeCanvas(window, this.renderer, this.canvas); }, false);
         Callbacks.resizeCanvas(window, this.renderer, this.canvas);
@@ -64,7 +70,7 @@ class App extends React.Component<{}, {}>
     public render()
     {
         return (
-            <Menu currentColor={this.renderer.color}/>
+            <Menu currentColor={this.color}/>
         );
     }
 }
