@@ -64,8 +64,7 @@ class App extends React.Component<{}, {}>
     public render()
     {
         return (
-            <Menu
-                currentColor={this.renderer.color}/>
+            <Menu currentColor={this.renderer.color}/>
         );
     }
 }
