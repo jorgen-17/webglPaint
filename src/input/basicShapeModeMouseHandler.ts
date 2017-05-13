@@ -25,7 +25,7 @@ export class BasicShapeModeMouseHandler implements IMouseHandler
             let point = MouseHelper.clicksToPoints(event, canvas);
             this.endPoint = { x: point.x, y: point.y };
             let shape: Shape = ShapeFactory.createShape(this.beginningPoint, this.endPoint, renderer.shape,
-                renderer.getRGBColor(), renderer.gl);
+                renderer.color, renderer.gl);
             renderer.addShapeToScene(shape);
             this.beginningPoint = null;
         }

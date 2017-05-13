@@ -21,8 +21,8 @@
         ]
     },
     "exclude": [
-        "**/node_modules/*",
-        "**/lib/typings/*",
+        "**/node_modules/**/*",
+        "**/typings/**/*",
         "**/*.d.ts"
     ]
 }
