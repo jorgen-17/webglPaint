@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { IWebGLRenderer, WebGLRenderer, ContextWrangler } from "webgl-renderer";
 import { CanvasMouseHandler } from "./input/canvasMouseHandler";
 import { RenderModeMouseHandler } from "./input/renderModeMouseHandlers";
 import { BasicShapeModeMouseHandler } from "./input/basicShapeModeMouseHandler";
@@ -9,7 +8,7 @@ import { LineMouseHandler } from "./input/lineMouseHandler";
 import { Menu } from "./ui/reactComponents/menu";
 import { Dispatcher } from "./simpledux";
 import * as Events from "./events";
-import { Color } from "webgl-renderer";
+import { IWebGLRenderer, WebGLRenderer, ContextWrangler, Color, ColorMapper, RGBColor } from "webgl-renderer";
 
 class App extends React.Component<{}, {}>
 {
@@ -27,8 +26,12 @@ class App extends React.Component<{}, {}>
         const basicShapeModeMouseHandler = new BasicShapeModeMouseHandler();
         const lineMouseHandler = new LineMouseHandler();
 
+        const backgroundColor: RGBColor = new RGBColor(0.1, 0.1, 0.1);
+        const defaultColor: Color = "white";
+
         Dispatcher.addCallback("colorChanged", (colorPayload: Events.ColorChangeEvent) => {
             this.color = colorPayload.newColor;
+            this.renderer.color = ColorMapper.colorToRGBColor(this.color);
             this.setState({});
         });
 
@@ -47,11 +50,12 @@ class App extends React.Component<{}, {}>
             this.canvasMouseHandler.mouseHandler = renderModeMouseHandler;
         });
 
+        this.color = defaultColor;
+
         this.canvas = document.getElementById("mycanvas") as HTMLCanvasElement;
         this.gl = ContextWrangler.getContext(this.canvas);
-        this.renderer = new WebGLRenderer(this.canvas.width, this.canvas.height, this.gl);
-
-        this.color = "white";
+        this.renderer = new WebGLRenderer(this.canvas.width, this.canvas.height, this.gl,
+            backgroundColor, ColorMapper.colorToRGBColor(this.color));
 
         window.addEventListener("resize", () => { Callbacks.resizeCanvas(window, this.renderer, this.canvas); }, false);
         Callbacks.resizeCanvas(window, this.renderer, this.canvas);
