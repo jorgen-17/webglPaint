@@ -12,11 +12,11 @@
         "react": "^15.4.2",
         "react-dom": "^15.4.2",
         "simple-dux": "^1.1.0",
-        "webgl-renderer": "^0.3.4"
+        "webgl-renderer": "0.6.5"
     },
     "devDependencies": {
         "source-map-loader": "^0.1.6",
-        "typescript": "^2.2.2",
+        "typescript": "^2.4.1",
         "ts-loader": "^2.0.0",
         "tslint": "^4.5.1",
         "webpack": "^2.4.1",

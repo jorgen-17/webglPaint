@@ -1,8 +1,8 @@
-import { Point2d } from "webgl-renderer";
+import { Vec3 } from "webgl-renderer";
 
 export class MouseHelper
 {
-    public static clicksToPoints (event: MouseEvent, canvas: HTMLCanvasElement): Point2d
+    public static clicksToPoints (event: MouseEvent, canvas: HTMLCanvasElement): Vec3
     {
         let x = event.clientX;
         let y = event.clientY;
@@ -13,6 +13,6 @@ export class MouseHelper
         x = ((x - rect.left) - canvasWidth / 2) / (canvasWidth / 2);
         y = (canvasHeight / 2 - (y - rect.top)) / (canvasHeight / 2);
 
-        return {x: x, y: y};
+        return new Vec3(x, y);
     }
 }

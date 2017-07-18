@@ -1,31 +1,33 @@
-import { Point2d } from "webgl-renderer";
+import { Vec3, ShapeMode, WebGLRenderer } from 'webgl-renderer';
 import { IMouseHandler } from "./iMouseHandler";
-import { IWebGLRenderer } from "webgl-renderer";
-import { Shape } from "webgl-renderer";
-import { ShapeFactory } from "webgl-renderer";
+import { Shape2d } from "webgl-renderer";
+import { ShapeFactory, RGBColor } from "webgl-renderer";
 import { MouseHelper } from "./mouseHelper";
 
 export class BasicShapeModeMouseHandler implements IMouseHandler
 {
-    private beginningPoint: Point2d | null;
-    private endPoint: Point2d | null;
+    private beginningPoint: Vec3 | null;
+    private endPoint: Vec3 | null;
 
-    public mouseDownHandler(event: MouseEvent, canvas: HTMLCanvasElement, renderer: IWebGLRenderer): void
+    public mouseDownHandler(event: MouseEvent, canvas: HTMLCanvasElement,
+        renderer: WebGLRenderer): void
     {
         let point = MouseHelper.clicksToPoints(event, canvas);
-        this.beginningPoint = { x: point.x, y: point.y };
+        this.beginningPoint = new Vec3(point.x, point.y);
     }
 
-    public mouseMoveHandler(mouseIsDown: boolean, event: MouseEvent, canvas: HTMLCanvasElement, renderer: IWebGLRenderer): void { /* do nothing */ }
+    public mouseMoveHandler(mouseIsDown: boolean, event: MouseEvent,
+        canvas: HTMLCanvasElement, renderer: WebGLRenderer): void { /* do nothing */ }
 
-    public mouseUpHandler(event: MouseEvent, canvas: HTMLCanvasElement, renderer: IWebGLRenderer): void
+    public mouseUpHandler(event: MouseEvent, canvas: HTMLCanvasElement,
+        renderer: WebGLRenderer, shapeMode: ShapeMode, color: RGBColor): void
     {
         if (this.beginningPoint !== null)
         {
             let point = MouseHelper.clicksToPoints(event, canvas);
-            this.endPoint = { x: point.x, y: point.y };
-            let shape: Shape = ShapeFactory.createShape(this.beginningPoint, this.endPoint, renderer.shape,
-                renderer.color, renderer.gl);
+            this.endPoint = new Vec3(point.x, point.y);
+            let shape: Shape2d = ShapeFactory.createShape(this.beginningPoint, this.endPoint,
+                shapeMode, renderer.gl, color);
             renderer.addShapeToScene(shape);
             this.beginningPoint = null;
         }

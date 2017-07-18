@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { IWebGLRenderer, WebGLRenderer, ContextWrangler } from "webgl-renderer";
+import { WebGLRenderer, ContextWrangler, Color, ColorMapper } from "webgl-renderer";
+
 import { CanvasMouseHandler } from "./input/canvasMouseHandler";
 import { RenderModeMouseHandler } from "./input/renderModeMouseHandlers";
 import { BasicShapeModeMouseHandler } from "./input/basicShapeModeMouseHandler";
@@ -9,15 +10,14 @@ import { LineMouseHandler } from "./input/lineMouseHandler";
 import { Menu } from "./ui/reactComponents/menu";
 import { Dispatcher } from "./simpledux";
 import * as Events from "./events";
-import { Color } from "webgl-renderer";
 
 class App extends React.Component<{}, {}>
 {
     private canvas:  HTMLCanvasElement;
     private gl: WebGLRenderingContext;
-    private renderer: IWebGLRenderer;
+    private renderer: WebGLRenderer;
     private canvasMouseHandler: CanvasMouseHandler;
-    private color: Color;
+    private currentColor: Color;
 
     constructor()
     {
@@ -28,17 +28,18 @@ class App extends React.Component<{}, {}>
         const lineMouseHandler = new LineMouseHandler();
 
         Dispatcher.addCallback("colorChanged", (colorPayload: Events.ColorChangeEvent) => {
-            this.color = colorPayload.newColor;
+            this.currentColor = colorPayload.newColor;
+            this.canvasMouseHandler.currentColor = ColorMapper.colorToRGBColor(colorPayload.newColor);
             this.setState({});
         });
 
         Dispatcher.addCallback("shapeChanged", (shapePayload: Events.ShapeChangeEvent) => {
-            this.renderer.shape = shapePayload.newShape;
+            this.canvasMouseHandler.currentShapeMode = shapePayload.newShape;
             this.canvasMouseHandler.mouseHandler = basicShapeModeMouseHandler;
         });
 
         Dispatcher.addCallback("drawingLines", (colorPayload: Events.DrawingLinesEvent) => {
-            this.renderer.shape = "lines";
+            this.canvasMouseHandler.currentShapeMode = "lines";
             this.canvasMouseHandler.mouseHandler = lineMouseHandler;
         });
 
@@ -51,12 +52,14 @@ class App extends React.Component<{}, {}>
         this.gl = ContextWrangler.getContext(this.canvas);
         this.renderer = new WebGLRenderer(this.canvas.width, this.canvas.height, this.gl);
 
-        this.color = "white";
+        this.currentColor = "white";
+        const defaultShapeMode = "points";
 
         window.addEventListener("resize", () => { Callbacks.resizeCanvas(window, this.renderer, this.canvas); }, false);
         Callbacks.resizeCanvas(window, this.renderer, this.canvas);
 
-        this.canvasMouseHandler = new CanvasMouseHandler(this.canvas, this.renderer, renderModeMouseHandler);
+        this.canvasMouseHandler = new CanvasMouseHandler(this.canvas, this.renderer,
+            renderModeMouseHandler, defaultShapeMode, ColorMapper.colorToRGBColor(this.currentColor));
 
         this.canvas.addEventListener("mousedown", (event: MouseEvent) => { this.canvasMouseHandler.mouseDown(event); } , false);
         this.canvas.addEventListener("mousemove", (event: MouseEvent) => { this.canvasMouseHandler.mouseMove(event); }, false);
@@ -68,7 +71,7 @@ class App extends React.Component<{}, {}>
     public render()
     {
         return (
-            <Menu currentColor={this.color}/>
+            <Menu currentColor={this.currentColor}/>
         );
     }
 }
