@@ -48,8 +48,6 @@ class App extends React.Component<{}, {}>
             this.canvasMouseHandler.mouseHandler = renderModeMouseHandler;
         });
 
-
-
         this.canvas = document.getElementById("mycanvas") as HTMLCanvasElement;
         this.gl = ContextWrangler.getContext(this.canvas);
 

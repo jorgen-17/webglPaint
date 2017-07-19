@@ -10,14 +10,15 @@ export class BasicShapeModeMouseHandler implements IMouseHandler
     private endPoint: Vec3 | null;
 
     public mouseDownHandler(event: MouseEvent, canvas: HTMLCanvasElement,
-        renderer: WebGLRenderer): void
+        renderer: WebGLRenderer, shape: ShapeMode, color: RGBColor): void
     {
         let point = MouseHelper.clicksToPoints(event, canvas);
         this.beginningPoint = new Vec3(point.x, point.y);
     }
 
     public mouseMoveHandler(mouseIsDown: boolean, event: MouseEvent,
-        canvas: HTMLCanvasElement, renderer: WebGLRenderer): void { /* do nothing */ }
+        canvas: HTMLCanvasElement, renderer: WebGLRenderer, shape: ShapeMode,
+        color: RGBColor): void { /* do nothing */ }
 
     public mouseUpHandler(event: MouseEvent, canvas: HTMLCanvasElement,
         renderer: WebGLRenderer, shapeMode: ShapeMode, color: RGBColor): void

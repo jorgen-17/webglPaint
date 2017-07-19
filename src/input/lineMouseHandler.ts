@@ -13,7 +13,8 @@ export class LineMouseHandler implements IMouseHandler
         this.line = new Line(point, renderer.gl, color);
     }
 
-    public mouseMoveHandler(mouseIsDown: boolean, event: MouseEvent, canvas: HTMLCanvasElement, renderer: WebGLRenderer): void
+    public mouseMoveHandler(mouseIsDown: boolean, event: MouseEvent, canvas: HTMLCanvasElement,
+        renderer: WebGLRenderer, shape: ShapeMode, color: RGBColor): void
     {
         if (mouseIsDown)
         {
