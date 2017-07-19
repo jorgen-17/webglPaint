@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { WebGLRenderer, ContextWrangler, Color, ColorMapper } from "webgl-renderer";
+import { WebGLRenderer, ContextWrangler, DrawingSettings, Color, ColorMapper, RGBColor } from "webgl-renderer";
 
 import { CanvasMouseHandler } from "./input/canvasMouseHandler";
 import { RenderModeMouseHandler } from "./input/renderModeMouseHandlers";
@@ -48,9 +48,14 @@ class App extends React.Component<{}, {}>
             this.canvasMouseHandler.mouseHandler = renderModeMouseHandler;
         });
 
+
+
         this.canvas = document.getElementById("mycanvas") as HTMLCanvasElement;
         this.gl = ContextWrangler.getContext(this.canvas);
-        this.renderer = new WebGLRenderer(this.canvas.width, this.canvas.height, this.gl);
+
+        const backgroundColor: RGBColor = new RGBColor(0.1, 0.1, 0.1);
+        let drawingSettings: DrawingSettings = { backgroundColor: backgroundColor };
+        this.renderer = new WebGLRenderer(this.canvas.width, this.canvas.height, this.gl, drawingSettings);
 
         this.currentColor = "white";
         const defaultShapeMode = "points";
