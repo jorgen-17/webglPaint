@@ -1,11 +1,10 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { WebGLRenderer, ContextWrangler, DrawingSettings, Color, ColorMapper, RGBColor } from "webgl-renderer";
+import { WebGLRenderer, RenderingOptions, Color, ColorMapper, RGBColor } from "webgl-renderer";
 
 import { CanvasMouseHandler } from "./input/canvasMouseHandler";
 import { RenderModeMouseHandler } from "./input/renderModeMouseHandlers";
 import { BasicShapeModeMouseHandler } from "./input/basicShapeModeMouseHandler";
-import { Callbacks } from "./utils/callbacks";
 import { LineMouseHandler } from "./input/lineMouseHandler";
 import { Menu } from "./ui/reactComponents/menu";
 import { Dispatcher } from "./simpledux";
@@ -49,17 +48,17 @@ class App extends React.Component<{}, {}>
         });
 
         this.canvas = document.getElementById("mycanvas") as HTMLCanvasElement;
-        this.gl = ContextWrangler.getContext(this.canvas);
 
         const backgroundColor: RGBColor = new RGBColor(0.1, 0.1, 0.1);
-        let drawingSettings: DrawingSettings = { backgroundColor: backgroundColor };
-        this.renderer = new WebGLRenderer(this.canvas.width, this.canvas.height, this.gl, drawingSettings);
+        let renderingOptions: RenderingOptions =
+        {
+            backgroundColor: backgroundColor,
+            fullscreen: true
+        };
+        this.renderer = new WebGLRenderer(this.canvas, renderingOptions);
 
         this.currentColor = "white";
         const defaultShapeMode = "points";
-
-        window.addEventListener("resize", () => { Callbacks.resizeCanvas(window, this.renderer, this.canvas); }, false);
-        Callbacks.resizeCanvas(window, this.renderer, this.canvas);
 
         this.canvasMouseHandler = new CanvasMouseHandler(this.canvas, this.renderer,
             renderModeMouseHandler, defaultShapeMode, ColorMapper.colorToRGBColor(this.currentColor));
@@ -68,7 +67,7 @@ class App extends React.Component<{}, {}>
         this.canvas.addEventListener("mousemove", (event: MouseEvent) => { this.canvasMouseHandler.mouseMove(event); }, false);
         this.canvas.addEventListener("mouseup", (event: MouseEvent) => { this.canvasMouseHandler.mouseUp(event); }, false);
 
-        Callbacks.renderLoop(this.renderer, window);
+        this.renderer.start();
     }
 
     public render()
