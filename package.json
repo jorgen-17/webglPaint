@@ -12,7 +12,7 @@
         "react": "^15.4.2",
         "react-dom": "^15.4.2",
         "simple-dux": "^1.1.0",
-        "webgl-renderer": "^0.7.0"
+        "webgl-renderer": "^0.7.2"
     },
     "devDependencies": {
         "source-map-loader": "^0.1.6",
