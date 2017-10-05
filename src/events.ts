@@ -29,13 +29,7 @@ export class DrawingLinesEvent implements IPayload
     public event_type = "drawingLines";
 }
 
-export class RenderModeChangeEvent implements IPayload
+export class DrawingPointsEvent implements IPayload
 {
-    public event_type = "renderModeChanged";
-    public newRenderMode: RenderMode;
-
-    constructor(newRenderMode: RenderMode)
-    {
-        this.newRenderMode = newRenderMode;
-    }
+    public event_type = "drawingPoints";
 }

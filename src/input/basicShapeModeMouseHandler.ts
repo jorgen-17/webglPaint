@@ -1,4 +1,4 @@
-import { Vec3, Shape2d, ShapeMode, WebGLRenderer, MouseHelper, ShapeFactory, RGBColor } from "webgl-renderer";
+import { Vec3, Shape, ShapeMode, WebGLRenderer, MouseHelper, ShapeFactory, RGBColor } from "webgl-renderer";
 import { IMouseHandler } from "./iMouseHandler";
 
 export class BasicShapeModeMouseHandler implements IMouseHandler
@@ -24,7 +24,7 @@ export class BasicShapeModeMouseHandler implements IMouseHandler
         {
             let point = MouseHelper.mouseEventToWebGlPoints(event, canvas);
             this.endPoint = new Vec3(point.x, point.y);
-            let shape: Shape2d = ShapeFactory.createShape(this.beginningPoint, this.endPoint,
+            let shape: Shape = ShapeFactory.createShape(this.beginningPoint, this.endPoint,
                 shapeMode, renderer.gl, color);
             renderer.addShapeToScene(shape);
             this.beginningPoint = null;

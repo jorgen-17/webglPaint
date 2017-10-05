@@ -1,7 +1,6 @@
 import * as React from "react";
 import { ModeButtonBar } from "./modeButtonBar";
 import { ShapeModeButton } from "./shapeModeButton";
-import { RenderModeButton } from "./renderModeButton";
 import { ColorModeButton } from "./colorModeButton";
 import { Dispatcher } from "../../simpledux";
 import { Color } from "webgl-renderer";
@@ -37,25 +36,13 @@ export class Menu extends React.Component<IMenuProps, {}>
                     baseId="shape-mode"
                     mainButtonTooltip="Choose a Shape"
                     mainButtonBaseId="shape-selector">
-                    <ShapeModeButton idBase="points" toolTip="Points" mode="points" clickHandler={this.renderModeHandler}/>
+                    <ShapeModeButton idBase="points" toolTip="Points" mode="points" clickHandler={this.pointHandler}/>
                     <ShapeModeButton idBase="lines" toolTip="Lines" mode="lines" clickHandler={this.lineModeHandler}/>
                     <ShapeModeButton idBase="ellipses" toolTip="Ellipses" mode="ellipses" clickHandler={this.shapeModeHandler}/>
                     <ShapeModeButton idBase="triangles" toolTip="Triangles" mode="triangles" clickHandler={this.shapeModeHandler}/>
                     <ShapeModeButton idBase="rectangles" toolTip="Rectangles" mode="rectangles" clickHandler={this.shapeModeHandler}/>
                     <ShapeModeButton idBase="hexagon" toolTip="Hexagon" mode="hexagons" clickHandler={this.shapeModeHandler}/>
                     <ShapeModeButton idBase="octogon" toolTip="Octogon" mode="octogons" clickHandler={this.shapeModeHandler}/>
-                </ModeButtonBar>
-                <ModeButtonBar
-                    baseId="render-mode"
-                    mainButtonTooltip="Add Points To Render Mode"
-                    mainButtonBaseId="render-mode-selector">
-                    <RenderModeButton idBase="points" toolTip="Points" mode="points" clickHandler={this.renderModeHandler}/>
-                    <RenderModeButton idBase="lines" toolTip="Lines" mode="lines" clickHandler={this.renderModeHandler}/>
-                    <RenderModeButton idBase="line-strip" toolTip="Line Strip" mode="lineStrip" clickHandler={this.renderModeHandler}/>
-                    <RenderModeButton idBase="line-loop" toolTip="Line Loop" mode="lineLoop" clickHandler={this.renderModeHandler}/>
-                    <RenderModeButton idBase="triangles" toolTip="Triangles" mode="triangles" clickHandler={this.renderModeHandler}/>
-                    <RenderModeButton idBase="triangles-strip" toolTip="Triangle Strip" mode="triangleStrip" clickHandler={this.renderModeHandler}/>
-                    <RenderModeButton idBase="triangles-fan" toolTip="Triangle Fan" mode="triangleFan" clickHandler={this.renderModeHandler}/>
                 </ModeButtonBar>
             </div>
         );
@@ -82,10 +69,10 @@ export class Menu extends React.Component<IMenuProps, {}>
         Dispatcher.injectEvent(new Events.DrawingLinesEvent());
     }
 
-    private renderModeHandler(event: React.MouseEvent<HTMLDivElement>)
+    private pointHandler(event: React.MouseEvent<HTMLDivElement>)
     {
         const elem = event.currentTarget;
         if (elem === null) { return; }
-        Dispatcher.injectEvent(new Events.RenderModeChangeEvent(elem.attributes["data-mode"].nodeValue));
+        Dispatcher.injectEvent(new Events.DrawingPointsEvent());
     }
 }

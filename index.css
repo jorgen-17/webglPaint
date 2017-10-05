@@ -4,25 +4,18 @@ html, body { width:100%; height:100%; } /* just to be sure these are full screen
 
 canvas { display:block; } /* To remove the scrollbars */
 
-#render-mode-container {
+#shape-mode-container {
   bottom: 0;
   position: fixed;
   margin: 1em;
   right: 0px;
 }
 
-#shape-mode-container {
-  bottom: 0;
-  position: fixed;
-  margin: 1em;
-  right: 75px;
-}
-
 #color-mode-container {
   bottom: 0;
   position: fixed;
   margin: 1em;
-  right: 150px;
+  right: 75px;
 }
 
 .buttons {
