@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { WebGLRenderer, RenderingOptions, Color, ColorMapper, RGBColor } from "webgl-renderer";
+import { WebGLRenderer, RenderingOptions, Color, ColorMapper, RGBColor, Camera, Vec3 } from "webgl-renderer";
 
 import { CanvasMouseHandler } from "./input/canvasMouseHandler";
 import { BasicShapeModeMouseHandler } from "./input/basicShapeModeMouseHandler";
@@ -29,13 +29,18 @@ class App extends React.Component<{}, {}>
         this.lineMouseHandler = new LineMouseHandler();
         this.pointMouseHandler = new PointMouseHandler();
 
+        this.setupEventDispatchers();
+
         this.canvas = document.getElementById("mycanvas") as HTMLCanvasElement;
 
         const backgroundColor: RGBColor = new RGBColor(0.1, 0.1, 0.1);
+        const camera = new Camera((this.canvas.clientWidth / this.canvas.clientHeight),
+            60, 0.01, 2, new Vec3(0, 0, 0.88));
         let renderingOptions: RenderingOptions =
         {
             backgroundColor: backgroundColor,
-            fullscreen: true
+            fullscreen: true,
+            camera: camera
         };
         this.renderer = new WebGLRenderer(this.canvas, renderingOptions);
 

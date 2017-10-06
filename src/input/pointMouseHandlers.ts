@@ -8,7 +8,7 @@ export class PointMouseHandler implements IMouseHandler
     {
         const location = MouseHelper.mouseEventToWebGlPoints(event, canvas);
         const point = ShapeFactory.createPoint(location, renderer.gl, color);
-        console.log(renderer.addShapeToScene(point));
+        renderer.addShapeToScene(point);
     }
 
     public mouseMoveHandler(mouseIsDown: boolean, event: MouseEvent, canvas: HTMLCanvasElement,
