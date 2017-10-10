@@ -1,11 +1,11 @@
-import { WebGLRenderer, Line, ShapeMode, Vec3, RGBColor, MouseHelper } from "webgl-renderer";
+import { WebGL2dRenderer, Line, ShapeMode, Vec3, RGBColor, MouseHelper } from "webgl-renderer";
 import { IMouseHandler } from "./iMouseHandler";
 
 export class LineMouseHandler implements IMouseHandler
 {
     private line: Line;
 
-    public mouseDownHandler(event: MouseEvent, canvas: HTMLCanvasElement, renderer: WebGLRenderer,
+    public mouseDownHandler(event: MouseEvent, canvas: HTMLCanvasElement, renderer: WebGL2dRenderer,
         shapeMode: ShapeMode, color: RGBColor): void
     {
         let point: Vec3 = MouseHelper.mouseEventToWebGlPoints(event, canvas);
@@ -13,7 +13,7 @@ export class LineMouseHandler implements IMouseHandler
     }
 
     public mouseMoveHandler(mouseIsDown: boolean, event: MouseEvent, canvas: HTMLCanvasElement,
-        renderer: WebGLRenderer, shape: ShapeMode, color: RGBColor): void
+        renderer: WebGL2dRenderer, shape: ShapeMode, color: RGBColor): void
     {
         if (mouseIsDown)
         {
@@ -22,7 +22,7 @@ export class LineMouseHandler implements IMouseHandler
         }
     }
 
-    public mouseUpHandler(event: MouseEvent, canvas: HTMLCanvasElement, renderer: WebGLRenderer,
+    public mouseUpHandler(event: MouseEvent, canvas: HTMLCanvasElement, renderer: WebGL2dRenderer,
         shapeMode: ShapeMode, color: RGBColor): void
     {
         let point = MouseHelper.mouseEventToWebGlPoints(event, canvas);
