@@ -1,4 +1,4 @@
-import { WebGLRenderer, ShapeMode, RGBColor } from "webgl-renderer";
+import { WebGL2dRenderer, ShapeMode, RGBColor } from "webgl-renderer";
 import { IMouseHandler } from "./iMouseHandler";
 
 export class CanvasMouseHandler
@@ -8,9 +8,9 @@ export class CanvasMouseHandler
     public mouseHandler: IMouseHandler;
     private mouseIsDown: boolean;
     private canvas: HTMLCanvasElement;
-    private renderer: WebGLRenderer;
+    private renderer: WebGL2dRenderer;
 
-    constructor(canvas: HTMLCanvasElement, renderer: WebGLRenderer,
+    constructor(canvas: HTMLCanvasElement, renderer: WebGL2dRenderer,
         mouseHandler: IMouseHandler, shapeMode: ShapeMode, color: RGBColor)
     {
         this.mouseIsDown = false;

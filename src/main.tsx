@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { WebGLRenderer, RenderingOptions, Color, ColorMapper, RGBColor } from "webgl-renderer";
+import { WebGL2dRenderer, RenderingOptions, Color, ColorMapper, RGBColor } from "webgl-renderer";
 
 import { CanvasMouseHandler } from "./input/canvasMouseHandler";
 import { BasicShapeModeMouseHandler } from "./input/basicShapeModeMouseHandler";
@@ -13,8 +13,7 @@ import * as Events from "./events";
 class App extends React.Component<{}, {}>
 {
     private canvas:  HTMLCanvasElement;
-    private gl: WebGLRenderingContext;
-    private renderer: WebGLRenderer;
+    private renderer: WebGL2dRenderer;
     private canvasMouseHandler: CanvasMouseHandler;
     private currentColor: Color;
     private basicShapeModeMouseHandler: BasicShapeModeMouseHandler;
@@ -29,6 +28,8 @@ class App extends React.Component<{}, {}>
         this.lineMouseHandler = new LineMouseHandler();
         this.pointMouseHandler = new PointMouseHandler();
 
+        this.setupEventDispatchers();
+
         this.canvas = document.getElementById("mycanvas") as HTMLCanvasElement;
 
         const backgroundColor: RGBColor = new RGBColor(0.1, 0.1, 0.1);
@@ -37,7 +38,7 @@ class App extends React.Component<{}, {}>
             backgroundColor: backgroundColor,
             fullscreen: true
         };
-        this.renderer = new WebGLRenderer(this.canvas, renderingOptions);
+        this.renderer = new WebGL2dRenderer(this.canvas, renderingOptions);
 
         this.currentColor = "white";
         const defaultShapeMode = "triangles";
