@@ -1,5 +1,5 @@
 import { IMouseHandler } from "./iMouseHandler";
-import { WebGL2dRenderer, ShapeMode, RGBColor, MouseHelper, ShapeFactory } from "webgl-renderer";
+import { WebGL2dRenderer, ShapeMode, RGBColor, MouseHelper } from "webgl-renderer";
 
 export class PointMouseHandler implements IMouseHandler
 {
@@ -7,7 +7,7 @@ export class PointMouseHandler implements IMouseHandler
         shape: ShapeMode, color: RGBColor): void
     {
         const location = MouseHelper.mouseEventToWebGlPoints(event, canvas);
-        const point = ShapeFactory.createPoint(location, renderer.gl, color);
+        const point = renderer.shapeFactory.createPoint(location, renderer.gl, color);
         renderer.addShapeToScene(point);
     }
 
@@ -17,7 +17,7 @@ export class PointMouseHandler implements IMouseHandler
         if (mouseIsDown)
         {
             const location = MouseHelper.mouseEventToWebGlPoints(event, canvas);
-            const point = ShapeFactory.createPoint(location, renderer.gl, color);
+            const point = renderer.shapeFactory.createPoint(location, renderer.gl, color);
             renderer.addShapeToScene(point);
         }
     }
@@ -26,7 +26,7 @@ export class PointMouseHandler implements IMouseHandler
         shape: ShapeMode, color: RGBColor): void
     {
         const location = MouseHelper.mouseEventToWebGlPoints(event, canvas);
-        const point = ShapeFactory.createPoint(location, renderer.gl, color);
+        const point = renderer.shapeFactory.createPoint(location, renderer.gl, color);
         renderer.addShapeToScene(point);
     }
 }
