@@ -4,7 +4,8 @@
     "description": "webGl paint application",
     "main": "index.html",
     "scripts": {
-        "start": "./node_modules/.bin/webpack-dev-server"
+        "start": "npx webpack-dev-server",
+        "build": "tsc"
     },
     "dependencies": {
         "@types/react": "^15.0.12",

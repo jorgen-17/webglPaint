@@ -1,4 +1,4 @@
-import { Vec3, Shape, ShapeMode, WebGL2dRenderer, MouseHelper, RGBColor } from "webgl-renderer";
+import { Vec3, Shape, ShapeMode, WebGLRenderer2d, MouseHelper, RGBColor } from "webgl-renderer";
 import { IMouseHandler } from "./iMouseHandler";
 
 export class BasicShapeModeMouseHandler implements IMouseHandler
@@ -7,18 +7,18 @@ export class BasicShapeModeMouseHandler implements IMouseHandler
     private endPoint: Vec3 | null;
 
     public mouseDownHandler(event: MouseEvent, canvas: HTMLCanvasElement,
-        renderer: WebGL2dRenderer, shape: ShapeMode, color: RGBColor): void
+        renderer: WebGLRenderer2d, shape: ShapeMode, color: RGBColor): void
     {
         let point = MouseHelper.mouseEventToWebGlPoints(event, canvas);
         this.beginningPoint = new Vec3(point.x, point.y);
     }
 
     public mouseMoveHandler(mouseIsDown: boolean, event: MouseEvent,
-        canvas: HTMLCanvasElement, renderer: WebGL2dRenderer, shape: ShapeMode,
+        canvas: HTMLCanvasElement, renderer: WebGLRenderer2d, shape: ShapeMode,
         color: RGBColor): void { /* do nothing */ }
 
     public mouseUpHandler(event: MouseEvent, canvas: HTMLCanvasElement,
-        renderer: WebGL2dRenderer, shapeMode: ShapeMode, color: RGBColor): void
+        renderer: WebGLRenderer2d, shapeMode: ShapeMode, color: RGBColor): void
     {
         if (this.beginningPoint !== null)
         {
