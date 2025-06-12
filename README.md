@@ -5,3 +5,5 @@ getting up and running:
 >$npm start
 >
 >go to localhost:8080/webpack-dev-server/index.html
+
+![Screenshot](/img/screenshot.png)
